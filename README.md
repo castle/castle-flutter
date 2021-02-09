@@ -3,7 +3,6 @@
 **[Castle](https://castle.io) adds real-time monitoring of your authentication stack, instantly notifying you and your users on potential account hijacks.**
 
 [![Pub Version](https://img.shields.io/pub/v/flutter_castle)](https://pub.dev/packages/flutter_castle)
-[![License](https://img.shields.io/npm/l/@casteio/castle-flutter)](https://www.npmjs.com/package/@casteio/castle-flutter)
 [![CircleCI](https://img.shields.io/circleci/build/github/castle/castle-flutter/master?token=5e33890a81d6ff15736b559ad252a3b6ab6db9b2)](https://circleci.com/gh/castle/castle-flutter)
 [![codecov](https://codecov.io/gh/castle/castle-flutter/branch/master/graph/badge.svg)](https://codecov.io/gh/castle/castle-flutter)
 
