@@ -25,11 +25,12 @@ class _MyAppState extends State<MyApp> {
   Future<void> initCastle() async {
     try {
       //await Castle.configureWithPublishableKey("pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ");
-      await Castle.configure(Configuration("pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ",
+      var configuration = Configuration("pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ",
           true,
           100,
           20,
-          false));
+          false);
+      await Castle.configure(configuration);
     } on PlatformException {
 
     }
