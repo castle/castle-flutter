@@ -1,0 +1,29 @@
+PODS:
+  - Castle (1.0.7)
+  - castle_flutter (0.0.1):
+    - Castle
+    - Flutter
+  - Flutter (1.0.0)
+
+DEPENDENCIES:
+  - castle_flutter (from `.symlinks/plugins/castle_flutter/ios`)
+  - Flutter (from `Flutter`)
+
+SPEC REPOS:
+  trunk:
+    - Castle
+
+EXTERNAL SOURCES:
+  castle_flutter:
+    :path: ".symlinks/plugins/castle_flutter/ios"
+  Flutter:
+    :path: Flutter
+
+SPEC CHECKSUMS:
+  Castle: f3e69de65337604e604355fa72eaffcd5efb02f4
+  castle_flutter: 4c5a7021d9b539ced9d3a791fd25ff4a015f3f7f
+  Flutter: 446b87ace8a3747a167979213b4aef59a0b5e5fa
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.10.1

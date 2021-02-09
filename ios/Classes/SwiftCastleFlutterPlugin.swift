@@ -1,7 +1,7 @@
 import Flutter
 import UIKit
 import Castle
-import CastleConfiguration
+import Castle.CastleConfiguration
 
 public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
@@ -53,12 +53,12 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
     
     private func configureWithPublishableKey(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         if let args = call.arguments as? Dictionary<String, Any> {
-            let configuration = CastleConfiguration(publishableKey: args["publishableKey"] as? String)
-            configuration.isDebugLoggingEnabled = args["debugLoggingEnabled"] as? Bool
-            configuration.flushLimit = args["flushLimit"] as? Int
-            configuration.maxQueueLimit(args["maxQueueLimit"] as? Int)
+            let configuration = CastleConfiguration(publishableKey: (args["publishableKey"] as? String)!)
+            configuration.isDebugLoggingEnabled = (args["debugLoggingEnabled"] as? Bool)!
+            configuration.flushLimit = (args["flushLimit"] as? UInt)!
+            configuration.maxQueueLimit = (args["maxQueueLimit"] as? UInt)!
 
-            Castle.setup(with: configuration)
+            Castle.configure(configuration)
             
             result(true)
         } else {
@@ -68,7 +68,7 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
     
     private func identify(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         if let args = call.arguments as? Dictionary<String, Any> {
-            Castle.identify(userId: args["userId"] as? String)
+            Castle.identify((args["userId"] as? String)!)
             
             result(true)
         } else {
@@ -78,7 +78,7 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
     
     private func secure(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         if let args = call.arguments as? Dictionary<String, Any> {
-            Castle.secure(signature: args["signature"] as? String)
+            Castle.secure((args["signature"] as? String)!)
             
             result(true)
         } else {
@@ -88,7 +88,7 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
     
     private func screen(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         if let args = call.arguments as? Dictionary<String, Any> {
-            Castle.screen(signature: args["name"] as? String)
+            Castle.screen((args["name"] as? String)!)
             
             result(true)
         } else {
@@ -104,7 +104,7 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
     
     private func flushIfNeeded(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         if let args = call.arguments as? Dictionary<String, Any> {
-            Castle.flushIfNeeded(url: args["url"] as? String)
+            Castle.flushIfNeeded(URL(string: (args["url"] as? String)!)!)
             
             result(true)
         } else {
@@ -119,7 +119,7 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
     }
     
     private func baseUrl(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        result(Castle.baseUrl())
+        result(Castle.baseURL())
     }
     
     private func clientId(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -127,7 +127,7 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
     }
     
     private func clientIdHeaderName(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        result(Castle.clientIdHeaderName())
+        result(CastleClientIdHeaderName)
     }
     
     private func userId(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
