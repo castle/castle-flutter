@@ -4,14 +4,14 @@ import Castle
 import Castle.CastleConfiguration
 
 public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
-  public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "castle", binaryMessenger: registrar.messenger())
-    let instance = SwiftCastleFlutterPlugin()
-    registrar.addMethodCallDelegate(instance, channel: channel)
-  }
-
-  public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-    switch call.method {
+    public static func register(with registrar: FlutterPluginRegistrar) {
+        let channel = FlutterMethodChannel(name: "castle", binaryMessenger: registrar.messenger())
+        let instance = SwiftCastleFlutterPlugin()
+        registrar.addMethodCallDelegate(instance, channel: channel)
+    }
+    
+    public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+        switch call.method {
         case "configure":
             configure(call, result: result)
         case "configureWithPublishableKey":
@@ -44,8 +44,8 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
             queueSize(call, result: result)
         default:
             result(FlutterMethodNotImplemented)
+        }
     }
-  }
     
     private func configure(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         
@@ -57,7 +57,7 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
             configuration.isDebugLoggingEnabled = (args["debugLoggingEnabled"] as? Bool)!
             configuration.flushLimit = (args["flushLimit"] as? UInt)!
             configuration.maxQueueLimit = (args["maxQueueLimit"] as? UInt)!
-
+            
             Castle.configure(configuration)
             
             result(true)
