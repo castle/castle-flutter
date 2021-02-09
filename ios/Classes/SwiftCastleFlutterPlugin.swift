@@ -48,18 +48,36 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
     }
     
     private func configure(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        
+        if let args = call.arguments as? Dictionary<String, Any> {
+            let configuration = CastleConfiguration(publishableKey: (args["publishableKey"] as? String)!)
+            
+            if let debugLoggingEnabled = args["debugLoggingEnabled"] as? Bool {
+                configuration.isDebugLoggingEnabled = debugLoggingEnabled
+            }
+            
+            if let useCloudflareApp = args["useCloudflareApp"] as? Bool {
+                configuration.useCloudflareApp = useCloudflareApp
+            }
+            
+            if let flushLimit = args["flushLimit"] as? UInt {
+                configuration.flushLimit = flushLimit
+            }
+
+            if let maxQueueLimit = args["maxQueueLimit"] as? UInt {
+                configuration.maxQueueLimit = maxQueueLimit
+            }
+            
+            Castle.configure(configuration)
+            
+            result(true)
+        } else {
+            result(FlutterError.init(code: "bad args", message: nil, details: nil))
+        }
     }
     
     private func configureWithPublishableKey(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         if let args = call.arguments as? Dictionary<String, Any> {
-            let configuration = CastleConfiguration(publishableKey: (args["publishableKey"] as? String)!)
-            configuration.isDebugLoggingEnabled = (args["debugLoggingEnabled"] as? Bool)!
-            configuration.flushLimit = (args["flushLimit"] as? UInt)!
-            configuration.maxQueueLimit = (args["maxQueueLimit"] as? UInt)!
-            
-            Castle.configure(configuration)
-            
+            Castle.configure(withPublishableKey: (args["publishableKey"] as? String)!)
             result(true)
         } else {
             result(FlutterError.init(code: "bad args", message: nil, details: nil))
