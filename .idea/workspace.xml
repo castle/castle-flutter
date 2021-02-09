@@ -8,7 +8,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1oEoK7SqzdgefyC8Ux8Rih2ky3h" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -35,26 +39,26 @@
       <screen x="0" y="25" width="1680" height="952" />
     </state>
     <state x="100" y="125" width="1480" height="752" key="AVDManager/0.25.1680.952@0.25.1680.952" timestamp="1612875894931" />
-    <state width="1638" height="246" key="GridCell.Tab.0.bottom" timestamp="1612879986975">
+    <state width="1638" height="246" key="GridCell.Tab.0.bottom" timestamp="1612880304816">
       <screen x="0" y="25" width="1680" height="952" />
     </state>
-    <state width="1638" height="246" key="GridCell.Tab.0.bottom/0.25.1680.952@0.25.1680.952" timestamp="1612879986975" />
-    <state width="1638" height="246" key="GridCell.Tab.0.center" timestamp="1612879986975">
+    <state width="1638" height="246" key="GridCell.Tab.0.bottom/0.25.1680.952@0.25.1680.952" timestamp="1612880304816" />
+    <state width="1638" height="246" key="GridCell.Tab.0.center" timestamp="1612880304815">
       <screen x="0" y="25" width="1680" height="952" />
     </state>
-    <state width="1638" height="246" key="GridCell.Tab.0.center/0.25.1680.952@0.25.1680.952" timestamp="1612879986975" />
-    <state width="1638" height="246" key="GridCell.Tab.0.left" timestamp="1612879986974">
+    <state width="1638" height="246" key="GridCell.Tab.0.center/0.25.1680.952@0.25.1680.952" timestamp="1612880304815" />
+    <state width="1638" height="246" key="GridCell.Tab.0.left" timestamp="1612880304815">
       <screen x="0" y="25" width="1680" height="952" />
     </state>
-    <state width="1638" height="246" key="GridCell.Tab.0.left/0.25.1680.952@0.25.1680.952" timestamp="1612879986974" />
-    <state width="1638" height="246" key="GridCell.Tab.0.right" timestamp="1612879986975">
+    <state width="1638" height="246" key="GridCell.Tab.0.left/0.25.1680.952@0.25.1680.952" timestamp="1612880304815" />
+    <state width="1638" height="246" key="GridCell.Tab.0.right" timestamp="1612880304815">
       <screen x="0" y="25" width="1680" height="952" />
     </state>
-    <state width="1638" height="246" key="GridCell.Tab.0.right/0.25.1680.952@0.25.1680.952" timestamp="1612879986975" />
-    <state x="558" y="256" width="615" height="490" key="find.popup" timestamp="1612879946553">
+    <state width="1638" height="246" key="GridCell.Tab.0.right/0.25.1680.952@0.25.1680.952" timestamp="1612880304815" />
+    <state x="558" y="256" width="615" height="490" key="find.popup" timestamp="1612880058067">
       <screen x="0" y="25" width="1680" height="952" />
     </state>
-    <state x="558" y="256" width="615" height="490" key="find.popup/0.25.1680.952@0.25.1680.952" timestamp="1612879946553" />
+    <state x="558" y="256" width="615" height="490" key="find.popup/0.25.1680.952@0.25.1680.952" timestamp="1612880058067" />
     <state width="409" height="62" key="javadoc.popup.new" timestamp="1612875201781">
       <screen x="0" y="25" width="1680" height="952" />
     </state>

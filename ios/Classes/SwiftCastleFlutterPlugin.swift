@@ -1,45 +1,47 @@
 import Flutter
 import UIKit
+import Castle
+import CastleConfiguration
 
-public class SwiftCastlePlugin: NSObject, FlutterPlugin {
+public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "castle", binaryMessenger: registrar.messenger())
-    let instance = SwiftCastlePlugin()
+    let instance = SwiftCastleFlutterPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     switch call.method {
         case "configure":
-            configure(call, result)
+            configure(call, result: result)
         case "configureWithPublishableKey":
-            configureWithPublishableKey(call, result)
+            configureWithPublishableKey(call, result: result)
         case "identify":
-            identify(call, result)
+            identify(call, result: result)
         case "secure":
-            secure(call, result)
+            secure(call, result: result)
         case "screen":
-            screen(call, result)
+            screen(call, result: result)
         case "flush":
-            flush(call, result)
+            flush(call, result: result)
         case "flushIfNeeded":
-            flushIfNeeded(call, result)
+            flushIfNeeded(call, result: result)
         case "reset":
-            reset(call, result)
+            reset(call, result: result)
         case "baseUrl":
-            baseUrl(call, result)
+            baseUrl(call, result: result)
         case "clientId":
-            clientId(call, result)
+            clientId(call, result: result)
         case "clientIdHeaderName":
-            clientIdHeaderName(call, result)
+            clientIdHeaderName(call, result: result)
         case "userId":
-            userId(call, result)
+            userId(call, result: result)
         case "userSignature":
-            userSignature(call, result)
+            userSignature(call, result: result)
         case "userAgent":
-            userAgent(call, result)
+            userAgent(call, result: result)
         case "queueSize":
-            queueSize(call, result)
+            queueSize(call, result: result)
         default:
             result(FlutterMethodNotImplemented)
     }

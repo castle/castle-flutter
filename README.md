@@ -1,4 +1,4 @@
-# castle
+# castle_flutter
 
 A new flutter plugin project.
 

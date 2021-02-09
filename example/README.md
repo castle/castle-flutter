@@ -1,6 +1,6 @@
-# castle_example
+# castle_flutter_example
 
-Demonstrates how to use the castle plugin.
+Demonstrates how to use the castle_flutter plugin.
 
 ## Getting Started
 

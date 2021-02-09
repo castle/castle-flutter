@@ -1,5 +1,5 @@
-name: castle
 description: Castle Flutter plugin.
+name: castle_flutter
 version: 0.0.1
 author: Castle Intelligence, Inc
 homepage: https://github.com/castle/castle-flutter
@@ -28,10 +28,10 @@ flutter:
   plugin:
     platforms:
       android:
-        package: io.castle.flutter.castle
-        pluginClass: CastlePlugin
+        package: io.castle.flutter.castle_flutter
+        pluginClass: CastleFlutterPlugin
       ios:
-        pluginClass: CastlePlugin
+        pluginClass: CastleFlutterPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

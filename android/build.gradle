@@ -1,4 +1,4 @@
-group 'io.castle.flutter.castle'
+group 'io.castle.flutter.castle_flutter'
 version '1.0-SNAPSHOT'
 
 buildscript {
@@ -31,7 +31,7 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
     }
     lintOptions {
         disable 'InvalidPackage'

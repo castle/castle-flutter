@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:castle/castle.dart';
+import 'package:castle_flutter/castle.dart';
 
 void main() {
   runApp(MyApp());

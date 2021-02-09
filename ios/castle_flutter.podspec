@@ -1,17 +1,17 @@
 #
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html.
-# Run `pod lib lint castle.podspec' to validate before publishing.
+# Run `pod lib lint castle_flutter.podspec' to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'castle'
+  s.name             = 'castle_flutter'
   s.version          = '0.0.1'
-  s.summary          = 'Castle flutter plugin.'
+  s.summary          = 'A new flutter plugin project.'
   s.description      = <<-DESC
 A new flutter plugin project.
                        DESC
-  s.homepage         = 'https://castle.io'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Castle Intelligence' => 'team@castle.io' }
+  s.homepage         = 'http://example.com'
+  s.license          = { :file => '../LICENSE' }
+  s.author           = { 'Your Company' => 'email@example.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
@@ -21,5 +21,5 @@ A new flutter plugin project.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
   s.swift_version = '5.0'
 
-  s.dependency 'Castle', '1.0.7'
+  s.dependency 'Castle'
 end
