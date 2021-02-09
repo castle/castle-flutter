@@ -7,7 +7,7 @@
 [![codecov](https://codecov.io/gh/castle/castle-flutter/branch/master/graph/badge.svg)](https://codecov.io/gh/castle/castle-flutter)
 
 ## Usage
-To use this plugin, add `flutter_segment` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
+To use this plugin, add `flutter_castle` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
 
 ## Requirements
 
