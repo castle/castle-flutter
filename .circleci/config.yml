@@ -1,52 +1,11 @@
-# This code is licensed from CircleCI to the user under the MIT license.
-# See here for details: https://circleci.com/developer/orbs/licensing
-version: 2.1
+version: 2
 jobs:
-  lint:
-    description: "Run static analysis for Flutter"
+  build:
     docker:
-      - image: cirrusci/flutter:v1.10.7
-    working_directory: ~/repo
+      - image: cirrusci/flutter
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - dart-dependencies-{{ checksum "pubspec.lock" }}
-            - dart-dependencies-
-      - run:
-          name: Install Dependencies
-          command: flutter pub get
-      - run:
-          name: Build
-          command: flutter packages pub run build_runner build
-      - save_cache:
-          paths:
-            - .dart_tool
-          key: dart-dependencies-{{ checksum "pubspec.lock" }}
-      - run:
-          name: Analyze code
-          command: flutter analyze lib
-  test:
-    description: "Run tests for Flutter"
-    docker:
-      - image: cirrusci/flutter:v1.10.7
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - dart-dependencies-{{ checksum "pubspec.lock" }}
-            - dart-dependencies-
-      - run:
-          name: Install Dependencies
-          command: flutter pub get
-      - run:
-          name: Build
-          command: flutter packages pub run build_runner build
-      - save_cache:
-          paths:
-            - .dart_tool
-          key: dart-dependencies-{{ checksum "pubspec.lock" }}
-      - run:
-          name: Run tests
-          command: flutter test
+      - run: echo $GCLOUD_KEY > ${HOME}/gcloud-service-key.json
+      - run: cat  ${HOME}/gcloud-service-key.json
+      - run: flutter doctor
+      - run: flutter test 
