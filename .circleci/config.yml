@@ -6,12 +6,5 @@ jobs:
     steps:
       - checkout
       - run: flutter doctor
-      - run: flutter test
-      - run:
-        name: Code coverage (graphql_flutter)
-        command: |
-          flutter test --coverage
-      - run:
-        name: Upload coverage
-        command: |
-          bash <(curl -s https://codecov.io/bash) -F
+      - run: flutter test --coverage
+      - run: bash <(curl -s https://codecov.io/bash)
