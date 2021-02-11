@@ -13,6 +13,8 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
+  coverage: "^0.15.2"
+  codecov: "^1.0.0"
   flutter_test:
     sdk: flutter
 
