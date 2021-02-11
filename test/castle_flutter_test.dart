@@ -1,6 +1,6 @@
-import 'package:castle/castle.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:castle_flutter/castle.dart';
 
 void main() {
   const MethodChannel channel = MethodChannel('castle');
