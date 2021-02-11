@@ -12,7 +12,7 @@ To use this plugin, add `flutter_castle` as a [dependency in your pubspec.yaml f
 ## Requirements
 
 ### Flutter
- - React Native 1.20.0+
+ - Flutter 1.20.0+
 
 ### iOS
  - iOS 9.0+
@@ -24,7 +24,7 @@ To use this plugin, add `flutter_castle` as a [dependency in your pubspec.yaml f
 ## Usage
 
 ```dart
-import Castle from "@casteio/react-native-castle";
+import 'package:castle_flutter/castle.dart';
 
 // Set properties
 await Castle.identify('thisisatestuser');
