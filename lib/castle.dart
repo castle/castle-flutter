@@ -1,19 +1,20 @@
 
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class Castle {
   static const MethodChannel _channel =
       const MethodChannel('castle');
 
-  static Future<void> configure(Configuration configuration) async {
-    await _channel.invokeMethod('configure', configuration.toParams());
-  }
-
-  static Future<void> configureWithPublishableKey(String publishableKey) async {
-    await _channel.invokeMethod('configureWithPublishableKey', <String, dynamic>{
+  static Future<void> configure({@required publishableKey, debugLoggingEnabled, maxQueueLimit, flushLimit, useCloudflareApp}) async {
+    await _channel.invokeMethod('configure', <String, dynamic>{
       'publishableKey': publishableKey,
+      'debugLoggingEnabled': debugLoggingEnabled,
+      'maxQueueLimit': maxQueueLimit,
+      'flushLimit': flushLimit,
+      'useCloudflareApp': useCloudflareApp,
     });
   }
 
@@ -83,25 +84,5 @@ class Castle {
   static Future<int> get queueSize async {
     final int queueSize = await _channel.invokeMethod('queueSize');
     return queueSize;
-  }
-}
-
-class Configuration {
-  Configuration(this.publishableKey, this.debugLoggingEnabled, this.maxQueueLimit, this.flushLimit, this.useCloudflareApp);
-
-  final String publishableKey;
-  final bool debugLoggingEnabled;
-  final int maxQueueLimit;
-  final int flushLimit;
-  final bool useCloudflareApp;
-
-  toParams() {
-    return <String, dynamic>{
-      'publishableKey': publishableKey,
-      'debugLoggingEnabled': debugLoggingEnabled,
-      'maxQueueLimit': maxQueueLimit,
-      'flushLimit': flushLimit,
-      'useCloudflareApp': useCloudflareApp,
-    };
   }
 }

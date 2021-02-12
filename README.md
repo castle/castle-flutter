@@ -39,16 +39,16 @@ var userSignature = await Castle.userSignature;
 var userAgent = await Castle.userAgent;
 
 // Configure with custom configuration properties
-var configuration = Configuration("pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ",
-    true,
-    100,
-    20,
-    false);
+var configuration = Configuration();
 
-await Castle.configure(configuration);
+await Castle.configure(publishable_key: 'pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ',
+    maxQueueLimit: 100,
+    flushLimit: 20,
+    useCloudflareApp: false,
+    debugLoggingEnabled: true);
 
 // Configure using default configuration properties
-await Castle.configureWithPublishableKey('pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ');
+await Castle.configure(publishable_key: 'pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ');
 
 ```
 

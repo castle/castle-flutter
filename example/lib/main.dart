@@ -25,12 +25,11 @@ class _MyAppState extends State<MyApp> {
   Future<void> initCastle() async {
     try {
       //await Castle.configureWithPublishableKey("pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ");
-      var configuration = Configuration("pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ",
-          true,
-          100,
-          20,
-          false);
-      await Castle.configure(configuration);
+      await Castle.configure(publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ",
+          debugLoggingEnabled: true,
+          maxQueueLimit: 100,
+          flushLimit: 20,
+          useCloudflareApp: false);
     } on PlatformException {
 
     }
