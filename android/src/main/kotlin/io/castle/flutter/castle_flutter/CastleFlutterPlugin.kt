@@ -32,9 +32,6 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
         call.method.equals("configure") -> {
           this.configure(call, result);
         }
-        call.method.equals("configureWithPublishableKey") -> {
-            this.configureWithPublishableKey(call, result);
-        }
         call.method.equals("identify") -> {
           this.identify(call, result);
         }
@@ -82,33 +79,27 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
 
   private fun configure(call: MethodCall, result: Result) {
       try {
-          val publishableKey = call.argument<String>("publishableKey")
-          val debugLoggingEnabled = call.argument<Boolean>("debugLoggingEnabled")
-          val maxQueueLimit = call.argument<Int>("maxQueueLimit")
-          val flushLimit = call.argument<Int>("flushLimit")
-          val useCloudflareApp = call.argument<Boolean>("useCloudflareApp")
+          val builder = CastleConfiguration.Builder()
 
-          val configuration: CastleConfiguration = CastleConfiguration.Builder()
-                  .publishableKey(publishableKey)
-                  .debugLoggingEnabled(debugLoggingEnabled == true) // Default false
-                  .flushLimit(flushLimit!!)
-                  .maxQueueLimit(maxQueueLimit!!)
-                  .useCloudflareApp(useCloudflareApp!!)
-                  .build()
+          call.argument<String>("publishableKey")?.let {
+              builder.publishableKey(it)
+          }
+          call.argument<Boolean>("debugLoggingEnabled")?.let {
+              builder.debugLoggingEnabled(it)
+          }
+          call.argument<Int>("maxQueueLimit")?.let {
+              builder.maxQueueLimit(it)
+          }
+          call.argument<Int>("flushLimit")?.let {
+              builder.flushLimit(it)
+          }
+          call.argument<Boolean>("useCloudflareApp")?.let {
+              builder.useCloudflareApp(it)
+          }
 
+          val configuration = builder.build()
           Castle.configure(application, configuration)
 
-          //Castle.configure(applicationContext, publishableKey)
-          result.success(true)
-      } catch (e: Exception) {
-          result.error("CastleException", e.localizedMessage, null)
-      }
-  }
-
-  private fun configureWithPublishableKey(call: MethodCall, result: Result) {
-      try {
-          val publishableKey = call.argument<String>("publishableKey")
-          Castle.configure(application, publishableKey)
           result.success(true)
       } catch (e: Exception) {
           result.error("CastleException", e.localizedMessage, null)

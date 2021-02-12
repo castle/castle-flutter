@@ -14,8 +14,6 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
         switch call.method {
         case "configure":
             configure(call, result: result)
-        case "configureWithPublishableKey":
-            configureWithPublishableKey(call, result: result)
         case "identify":
             identify(call, result: result)
         case "secure":
@@ -69,15 +67,6 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
             
             Castle.configure(configuration)
             
-            result(true)
-        } else {
-            result(FlutterError.init(code: "bad args", message: nil, details: nil))
-        }
-    }
-    
-    private func configureWithPublishableKey(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        if let args = call.arguments as? Dictionary<String, Any> {
-            Castle.configure(withPublishableKey: (args["publishableKey"] as? String)!)
             result(true)
         } else {
             result(FlutterError.init(code: "bad args", message: nil, details: nil))
