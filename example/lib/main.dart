@@ -56,19 +56,19 @@ class _MyAppState extends State<MyApp> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              new RaisedButton(
+              new ElevatedButton(
                   onPressed: _identify,
                   child: new Text("Identify")
               ),
-              new RaisedButton(
+              new ElevatedButton(
                   onPressed: _trackScreen,
                   child: new Text("Track Screen")
               ),
-              new RaisedButton(
+              new ElevatedButton(
                   onPressed: _reset,
                   child: new Text("Reset")
               ),
-              new RaisedButton(
+              new ElevatedButton(
                   onPressed: _flush,
                   child: new Text("Flush Events")
               ),
