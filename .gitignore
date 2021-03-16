@@ -30,3 +30,6 @@ unlinked_spec.ds
 
 # packages file containing multi-root paths
 .packages.generated
+
+# Coverage
+coverage/
