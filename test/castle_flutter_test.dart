@@ -9,7 +9,24 @@ void main() {
 
   setUp(() {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
-      return 100;
+      switch (methodCall.method) {
+        case 'baseUrl':
+          return 'https://api.castle.io';
+        case 'clientId':
+          return '1bdcfd7a-401b-4ccf-88fe-884ad298ff2c';
+        case 'clientIdHeaderName':
+          return 'X-Castle-Client-Id';
+        case 'userId':
+          return 'thisisatestuser1';
+        case 'userSignature':
+          return '944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52';
+        case 'userAgent':
+          return 'castle_flutter_example/1.0 (1)(Castle 1.2.2; Android 11; Google sdk_gphone_x86_arm)';
+        case 'queueSize':
+          return 100;
+        default:
+          return null;
+      }
     });
   });
 
@@ -17,7 +34,32 @@ void main() {
     channel.setMockMethodCallHandler(null);
   });
 
-  test('getQueueSize', () async {
+  test('baseUrl', () async {
+    expect(await Castle.baseUrl, 'https://api.castle.io');
+  });
+
+  test('clientId', () async {
+    expect(await Castle.clientId, '1bdcfd7a-401b-4ccf-88fe-884ad298ff2c');
+  });
+
+
+  test('clientIdHeaderName', () async {
+    expect(await Castle.clientIdHeaderName, 'X-Castle-Client-Id');
+  });
+
+  test('userId', () async {
+    expect(await Castle.userId, 'thisisatestuser1');
+  });
+
+  test('userSignature', () async {
+    expect(await Castle.userSignature, '944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52');
+  });
+
+  test('userAgent', () async {
+    expect(await Castle.userAgent, 'castle_flutter_example/1.0 (1)(Castle 1.2.2; Android 11; Google sdk_gphone_x86_arm)');
+  });
+
+  test('queueSize', () async {
     expect(await Castle.queueSize, 100);
   });
 }
