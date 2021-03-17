@@ -96,7 +96,9 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
           call.argument<Boolean>("useCloudflareApp")?.let {
               builder.useCloudflareApp(it)
           }
-
+          call.argument<List<String>>("baseURLAllowList")?.let {
+              builder.baseURLAllowList(it)
+          }
           val configuration = builder.build()
           Castle.configure(application, configuration)
 
