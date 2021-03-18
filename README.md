@@ -23,34 +23,7 @@ To use this plugin, add `flutter_castle` as a [dependency in your pubspec.yaml f
 
 ## Usage
 
-```dart
-import 'package:castle_flutter/castle.dart';
-
-// Set properties
-await Castle.identify('thisisatestuser');
-await Castle.secure('944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52');
-
-// Fetch properties
-var clientId = await Castle.clientId;
-var clientIdHeaderName = await Castle.clientIdHeaderName;
-var userId = await Castle.userId;
-var queueSize = await Castle.queueSize;
-var userSignature = await Castle.userSignature;
-var userAgent = await Castle.userAgent;
-
-// Configure with custom configuration properties
-var configuration = Configuration();
-
-await Castle.configure(publishable_key: 'pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ',
-    maxQueueLimit: 100,
-    flushLimit: 20,
-    useCloudflareApp: false,
-    debugLoggingEnabled: true);
-
-// Configure using default configuration properties
-await Castle.configure(publishable_key: 'pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ');
-
-```
+Please see the [Mobile Integration Guide](https://docs.castle.io).
 
 ## License
 
