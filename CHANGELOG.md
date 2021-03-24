@@ -1,3 +1,4 @@
-## 0.0.1
+# Changelog
 
-* TODO: Describe initial release.
+## 1.0.0 (2021-03-24)
+Initial public release
