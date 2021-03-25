@@ -130,7 +130,7 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
     }
 
     private func baseUrl(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        var urlString: String = Castle.baseURL().absoluteString
+        let urlString: String = Castle.baseURL().absoluteString
 
         result(urlString)
     }
