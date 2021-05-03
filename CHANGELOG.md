@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.3 (2021-05-03)
+**Bug fixes:**
+
+- [#11](https://github.com/castle/castle-flutter/pull/11) update to Castle Android 2.0.2
+
 ## 1.0.2 (2021-04-28)
 **Bug fixes:**
 
