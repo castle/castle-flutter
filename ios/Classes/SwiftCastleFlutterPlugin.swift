@@ -32,6 +32,8 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
             clientId(call, result: result)
         case "clientIdHeaderName":
             clientIdHeaderName(call, result: result)
+        case "requestTokenHeaderName":
+            requestTokenHeaderName(call, result: result)
         case "userId":
             userId(call, result: result)
         case "userSignature":
@@ -141,6 +143,10 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
 
     private func clientIdHeaderName(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         result(CastleClientIdHeaderName)
+    }
+
+    private func requestTokenHeaderName(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+        result(CastleRequestTokenHeaderName)
     }
 
     private func userId(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
