@@ -20,6 +20,7 @@ class _MyAppState extends State<MyApp> {
   int _queueSize = 0;
   String _userAgent = '';
   String _clientIdHeaderName = '';
+  String _requestTokenHeaderName = '';
 
   @override
   void initState() {
@@ -29,7 +30,7 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initCastle() async {
-    var clientId, userId, baseUrl, queueSize, userAgent, clientIdHeaderName;
+    var clientId, userId, baseUrl, queueSize, userAgent, clientIdHeaderName, requestTokenHeaderName;
     try {
       await Castle.configure(
         publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ",
@@ -45,6 +46,7 @@ class _MyAppState extends State<MyApp> {
       queueSize = await Castle.queueSize;
       userAgent = await Castle.userAgent;
       clientIdHeaderName = await Castle.clientIdHeaderName;
+      requestTokenHeaderName = await Castle.requestTokenHeaderName;
     } on PlatformException {
 
     }
@@ -61,6 +63,7 @@ class _MyAppState extends State<MyApp> {
       _queueSize = queueSize;
       _userAgent = userAgent.toString();
       _clientIdHeaderName = clientIdHeaderName.toString();
+      _requestTokenHeaderName = requestTokenHeaderName.toString();
     });
   }
 
@@ -94,6 +97,9 @@ class _MyAppState extends State<MyApp> {
               ),
               Text(
                 _clientIdHeaderName
+              ),
+              Text(
+                  _requestTokenHeaderName
               ),
               new ElevatedButton(
                   onPressed: _identify,
