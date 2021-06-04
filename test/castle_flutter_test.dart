@@ -16,7 +16,7 @@ void main() {
           return '1bdcfd7a-401b-4ccf-88fe-884ad298ff2c';
         case 'clientIdHeaderName':
           return 'X-Castle-Client-Id';
-        case 'clientIdHeaderName':
+        case 'requestTokenHeaderName':
           return 'X-Castle-Request-Token';
         case 'userId':
           return 'thisisatestuser1';
@@ -43,7 +43,6 @@ void main() {
   test('clientId', () async {
     expect(await Castle.clientId, '1bdcfd7a-401b-4ccf-88fe-884ad298ff2c');
   });
-
 
   test('requestTokenHeaderName', () async {
     expect(await Castle.requestTokenHeaderName, 'X-Castle-Request-Token');
