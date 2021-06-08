@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _clientId = '';
+  String _token = '';
   String _userId = '';
   String _baseUrl = '';
   int _queueSize = 0;
@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initCastle() async {
-    var clientId, userId, baseUrl, queueSize, userAgent, clientIdHeaderName, requestTokenHeaderName;
+    var token, userId, baseUrl, queueSize, userAgent, clientIdHeaderName, requestTokenHeaderName;
     try {
       await Castle.configure(
         publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ",
@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
         useCloudflareApp: false,
         baseURLAllowList: ["http://google.com"],
       );
-      clientId = await Castle.clientId;
+      token = await Castle.createRequestToken;
       userId = await Castle.userId;
       baseUrl = await Castle.baseUrl;
       queueSize = await Castle.queueSize;
@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> {
     if (!mounted) return;
 
     setState(() {
-      _clientId = clientId.toString();
+      _token = token.toString();
       _userId = userId.toString();
       _baseUrl = baseUrl.toString();
       _queueSize = queueSize;
@@ -81,7 +81,7 @@ class _MyAppState extends State<MyApp> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
-                _clientId
+                _token
               ),
               Text(
                 _userId

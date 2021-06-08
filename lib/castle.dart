@@ -67,6 +67,11 @@ class Castle {
     return clientIdHeaderName;
   }
 
+  static Future<String> get createRequestToken async {
+    final String token = await _channel.invokeMethod('createRequestToken');
+    return token;
+  }
+
   static Future<String> get requestTokenHeaderName async {
     final String requestTokenHeaderName = await _channel.invokeMethod('requestTokenHeaderName');
     return requestTokenHeaderName;

@@ -59,6 +59,9 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
         call.method.equals("clientIdHeaderName") -> {
           this.clientIdHeaderName(call, result);
         }
+        call.method.equals("createRequestToken") -> {
+            this.createRequestToken(call, result);
+        }
         call.method.equals("requestTokenHeaderName") -> {
             this.requestTokenHeaderName(call, result);
         }
@@ -185,6 +188,15 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
     } catch (e: Exception) {
       result.error("CastleException", e.localizedMessage, null)
     }
+  }
+
+  private fun createRequestToken(call: MethodCall, result: Result) {
+      try {
+          val token: String = Castle.createRequestToken()
+          result.success(token)
+      } catch (e: Exception) {
+          result.error("CastleException", e.localizedMessage, null)
+      }
   }
 
   private fun clientIdHeaderName(call: MethodCall, result: Result) {
