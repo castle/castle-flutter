@@ -219,7 +219,7 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
 
   private fun userId(call: MethodCall, result: Result) {
     try {
-      val userId: String = Castle.userId()
+      val userId: String? = Castle.userId()
       result.success(userId)
     } catch (e: Exception) {
       result.error("CastleException", e.localizedMessage, null)
