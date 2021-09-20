@@ -1,4 +1,8 @@
 # Changelog
+## 1.1.2 (2021-09-20)
+- Updated Castle Android SDK to 2.1.2
+- Updated Castle iOS SDK to 2.1.2
+
 ## 1.1.1 (2021-06-31)
 - [#19](https://github.com/castle/castle-flutter/pull/19) Make UserId nullable in Android bridge
 - [#18](https://github.com/castle/castle-flutter/pull/18) Migrate code to null safety
