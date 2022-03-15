@@ -131,7 +131,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _trackCustomProperties() {
-    Castle.custom("Example screen", {
+    Castle.custom("Custom event with properties", {
       "product": "iPhone 13 Pro",
       "price": 1099.99
     });
