@@ -10,12 +10,6 @@ void main() {
   setUp(() {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
       switch (methodCall.method) {
-        case 'baseUrl':
-          return 'https://api.castle.io';
-        case 'clientId':
-          return '1bdcfd7a-401b-4ccf-88fe-884ad298ff2c';
-        case 'clientIdHeaderName':
-          return 'X-Castle-Client-Id';
         case 'createRequestToken':
           return "abc123";
         case 'requestTokenHeaderName':
@@ -38,32 +32,12 @@ void main() {
     channel.setMockMethodCallHandler(null);
   });
 
-  test('baseUrl', () async {
-    expect(await Castle.baseUrl, 'https://api.castle.io');
-  });
-
-  test('clientId', () async {
-    expect(await Castle.clientId, '1bdcfd7a-401b-4ccf-88fe-884ad298ff2c');
-  });
-
-  test('clientIdHeaderName', () async {
-    expect(await Castle.clientIdHeaderName, 'X-Castle-Client-Id');
-  });
-
   test('createRequestToken', () async {
     expect(await Castle.createRequestToken, 'abc123');
   });
 
   test('requestTokenHeaderName', () async {
     expect(await Castle.requestTokenHeaderName, 'X-Castle-Request-Token');
-  });
-
-  test('userId', () async {
-    expect(await Castle.userId, 'thisisatestuser1');
-  });
-
-  test('userSignature', () async {
-    expect(await Castle.userSignature, '944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52');
   });
 
   test('userAgent', () async {
