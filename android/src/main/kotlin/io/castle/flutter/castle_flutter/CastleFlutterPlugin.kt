@@ -30,52 +30,40 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
     when {
         call.method.equals("configure") -> {
-          this.configure(call, result);
+          this.configure(call, result)
         }
-        call.method.equals("identify") -> {
-          this.identify(call, result);
-        }
-        call.method.equals("secure") -> {
-          this.secure(call, result);
+        call.method.equals("custom") -> {
+          this.custom(call, result)
         }
         call.method.equals("screen") -> {
-          this.screen(call, result);
+          this.screen(call, result)
         }
         call.method.equals("flush") -> {
-          this.flush(call, result);
+          this.flush(call, result)
         }
         call.method.equals("flushIfNeeded") -> {
-          this.flushIfNeeded(call, result);
+          this.flushIfNeeded(call, result)
         }
         call.method.equals("reset") -> {
-          this.reset(result);
+          this.reset(result)
         }
         call.method.equals("baseUrl") -> {
-          this.baseUrl(call, result);
-        }
-        call.method.equals("clientId") -> {
-          this.clientId(call, result);
-        }
-        call.method.equals("clientIdHeaderName") -> {
-          this.clientIdHeaderName(call, result);
+          this.baseUrl(call, result)
         }
         call.method.equals("createRequestToken") -> {
-            this.createRequestToken(call, result);
+            this.createRequestToken(call, result)
         }
         call.method.equals("requestTokenHeaderName") -> {
-            this.requestTokenHeaderName(call, result);
+            this.requestTokenHeaderName(call, result)
         }
-        call.method.equals("userId") -> {
-          this.userId(call, result);
-        }
-        call.method.equals("userSignature") -> {
-          this.userSignature(call, result);
+        call.method.equals("userJwt") -> {
+          this.userJwt(call, result)
         }
         call.method.equals("userAgent") -> {
-          this.userAgent(call, result);
+          this.userAgent(call, result)
         }
         call.method.equals("queueSize") -> {
-          this.queueSize(call, result);
+          this.queueSize(call, result)
         }
         else -> {
           result.notImplemented()
@@ -99,9 +87,6 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
           call.argument<Int>("flushLimit")?.let {
               builder.flushLimit(it)
           }
-          call.argument<Boolean>("useCloudflareApp")?.let {
-              builder.useCloudflareApp(it)
-          }
           call.argument<List<String>>("baseURLAllowList")?.let {
               builder.baseURLAllowList(it)
           }
@@ -114,30 +99,21 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
       }
   }
 
-  private fun identify(call: MethodCall, result: Result) {
-      try {
-          val userId = call.argument<String>("userId");
-          Castle.identify(userId)
-          result.success(true)
-      } catch (e: Exception) {
-          result.error("CastleException", e.localizedMessage, null)
-      }
-  }
-
-  private fun secure(call: MethodCall, result: Result) {
-      try {
-          val signature = call.argument<String>("signature");
-          Castle.secure(signature)
-          result.success(true)
-      } catch (e: Exception) {
-          result.error("CastleException", e.localizedMessage, null)
-      }
-  }
-
   private fun screen(call: MethodCall, result: Result) {
       try {
-          val name = call.argument<String>("name");
+          val name = call.argument<String>("name")
           Castle.screen(name)
+          result.success(true)
+      } catch (e: Exception) {
+          result.error("CastleException", e.localizedMessage, null)
+      }
+  }
+
+  private fun custom(call: MethodCall, result: Result) {
+      try {
+          val name = call.argument<String>("name")
+          val properties = call.argument<Map<String, Any>>("properties")
+          Castle.custom(name, properties)
           result.success(true)
       } catch (e: Exception) {
           result.error("CastleException", e.localizedMessage, null)
@@ -155,7 +131,7 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
 
   private fun flushIfNeeded(call: MethodCall, result: Result) {
       try {
-          val url = call.argument<String>("url");
+          val url = call.argument<String>("url")
           Castle.flushIfNeeded(url)
           result.success(true)
       } catch (e: Exception) {
@@ -181,15 +157,6 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
     }
   }
 
-  private fun clientId(call: MethodCall, result: Result) {
-    try {
-      val clientId: String = Castle.clientId()
-      result.success(clientId)
-    } catch (e: Exception) {
-      result.error("CastleException", e.localizedMessage, null)
-    }
-  }
-
   private fun createRequestToken(call: MethodCall, result: Result) {
       try {
           val token: String = Castle.createRequestToken()
@@ -197,15 +164,6 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
       } catch (e: Exception) {
           result.error("CastleException", e.localizedMessage, null)
       }
-  }
-
-  private fun clientIdHeaderName(call: MethodCall, result: Result) {
-    try {
-      val clientIdHeaderName: String = Castle.clientIdHeaderName
-      result.success(clientIdHeaderName)
-    } catch (e: Exception) {
-      result.error("CastleException", e.localizedMessage, null)
-    }
   }
 
   private fun requestTokenHeaderName(call: MethodCall, result: Result) {
@@ -217,24 +175,15 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
     }
   }
 
-  private fun userId(call: MethodCall, result: Result) {
+  private fun userJwt(call: MethodCall, result: Result) {
     try {
-      val userId: String? = Castle.userId()
-      result.success(userId)
+        val userJwt = call.argument<String>("userJwt")
+        Castle.userJwt(userJwt)
+      result.success(true)
     } catch (e: Exception) {
       result.error("CastleException", e.localizedMessage, null)
     }
   }
-
-  private fun userSignature(call: MethodCall, result: Result) {
-    try {
-      val userSignature: String = Castle.userSignature()
-      result.success(userSignature)
-    } catch (e: Exception) {
-      result.error("CastleException", e.localizedMessage, null)
-    }
-  }
-
   private fun userAgent(call: MethodCall, result: Result) {
     try {
       val userAgent: String = Castle.userAgent()

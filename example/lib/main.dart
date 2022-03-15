@@ -15,11 +15,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _token = '';
-  String _userId = '';
-  String _baseUrl = '';
   int _queueSize = 0;
   String _userAgent = '';
-  String _clientIdHeaderName = '';
   String _requestTokenHeaderName = '';
 
   @override
@@ -33,20 +30,19 @@ class _MyAppState extends State<MyApp> {
     var token, userId, baseUrl, queueSize, userAgent, clientIdHeaderName, requestTokenHeaderName;
     try {
       await Castle.configure(
-        publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ",
+        publishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA",
         debugLoggingEnabled: true,
         maxQueueLimit: 100,
         flushLimit: 20,
-        useCloudflareApp: false,
         baseURLAllowList: ["http://google.com"],
       );
       token = await Castle.createRequestToken;
-      userId = await Castle.userId;
-      baseUrl = await Castle.baseUrl;
       queueSize = await Castle.queueSize;
       userAgent = await Castle.userAgent;
-      clientIdHeaderName = await Castle.clientIdHeaderName;
       requestTokenHeaderName = await Castle.requestTokenHeaderName;
+      await Castle.userJwt(
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"
+      );
     } on PlatformException {
 
     }
@@ -58,11 +54,8 @@ class _MyAppState extends State<MyApp> {
 
     setState(() {
       _token = token.toString();
-      _userId = userId.toString();
-      _baseUrl = baseUrl.toString();
       _queueSize = queueSize;
       _userAgent = userAgent.toString();
-      _clientIdHeaderName = clientIdHeaderName.toString();
       _requestTokenHeaderName = requestTokenHeaderName.toString();
     });
   }
@@ -84,30 +77,29 @@ class _MyAppState extends State<MyApp> {
                 _token
               ),
               Text(
-                _userId
-              ),
-              Text(
-                _baseUrl
-              ),
-              Text(
                 _queueSize.toString()
               ),
               Text(
                 _userAgent
               ),
               Text(
-                _clientIdHeaderName
-              ),
-              Text(
                   _requestTokenHeaderName
               ),
               new ElevatedButton(
-                  onPressed: _identify,
-                  child: new Text("Identify")
+                  onPressed: _userJwt,
+                  child: new Text("Set user jwt")
               ),
               new ElevatedButton(
                   onPressed: _trackScreen,
                   child: new Text("Track Screen")
+              ),
+              new ElevatedButton(
+                  onPressed: _trackCustom,
+                  child: new Text("Track custom")
+              ),
+              new ElevatedButton(
+                  onPressed: _trackCustomProperties,
+                  child: new Text("Track custom with properties")
               ),
               new ElevatedButton(
                   onPressed: _reset,
@@ -124,12 +116,25 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  void _identify() {
-    Castle.identify("thisisatestuser1");
+  void _userJwt() {
+    Castle.userJwt(
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"
+    );
   }
 
   void _trackScreen() {
     Castle.screen("Example screen");
+  }
+
+  void _trackCustom() {
+    Castle.custom("Custom event", null);
+  }
+
+  void _trackCustomProperties() {
+    Castle.custom("Custom event with properties", {
+      "product": "iPhone 13 Pro",
+      "price": 1099.99
+    });
   }
 
   void _reset() {

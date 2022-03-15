@@ -14,32 +14,22 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
         switch call.method {
         case "configure":
             configure(call, result: result)
-        case "identify":
-            identify(call, result: result)
-        case "secure":
-            secure(call, result: result)
         case "screen":
             screen(call, result: result)
+        case "custom":
+            custom(call, result: result)
         case "flush":
             flush(call, result: result)
         case "flushIfNeeded":
             flushIfNeeded(call, result: result)
         case "reset":
             reset(call, result: result)
-        case "baseUrl":
-            baseUrl(call, result: result)
-        case "clientId":
-            clientId(call, result: result)
         case "createRequestToken":
             createRequestToken(call, result: result)
-        case "clientIdHeaderName":
-            clientIdHeaderName(call, result: result)
         case "requestTokenHeaderName":
             requestTokenHeaderName(call, result: result)
-        case "userId":
-            userId(call, result: result)
-        case "userSignature":
-            userSignature(call, result: result)
+        case "userJwt":
+            userJwt(call, result: result)
         case "userAgent":
             userAgent(call, result: result)
         case "queueSize":
@@ -55,10 +45,6 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
 
             if let debugLoggingEnabled = args["debugLoggingEnabled"] as? Bool {
                 configuration.isDebugLoggingEnabled = debugLoggingEnabled
-            }
-
-            if let useCloudflareApp = args["useCloudflareApp"] as? Bool {
-                configuration.useCloudflareApp = useCloudflareApp
             }
 
             if let flushLimit = args["flushLimit"] as? UInt {
@@ -81,9 +67,9 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
         }
     }
 
-    private func identify(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+    private func userJwt(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         if let args = call.arguments as? Dictionary<String, Any> {
-            Castle.identify((args["userId"] as? String)!)
+            Castle.userJwt((args["userJwt"] as? String)!)
 
             result(true)
         } else {
@@ -91,9 +77,11 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
         }
     }
 
-    private func secure(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+    private func custom(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         if let args = call.arguments as? Dictionary<String, Any> {
-            Castle.secure((args["signature"] as? String)!)
+            let name = (args["name"] as? String)!
+            let properties = (args["properties"] as? Dictionary<String, Any>) ?? [:]
+            Castle.custom(name: name, properties: properties)
 
             result(true)
         } else {
@@ -103,7 +91,7 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
 
     private func screen(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         if let args = call.arguments as? Dictionary<String, Any> {
-            Castle.screen((args["name"] as? String)!)
+            Castle.screen(name: (args["name"] as? String)!)
 
             result(true)
         } else {
@@ -133,34 +121,12 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
         result(true)
     }
 
-    private func baseUrl(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        let urlString: String = Castle.baseURL().absoluteString
-
-        result(urlString)
-    }
-
-    private func clientId(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        result(Castle.clientId())
-    }
-
-    private func clientIdHeaderName(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        result(CastleClientIdHeaderName)
-    }
-
     private func createRequestToken(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         result(Castle.createRequestToken())
     }
 
     private func requestTokenHeaderName(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         result(CastleRequestTokenHeaderName)
-    }
-
-    private func userId(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        result(Castle.userId())
-    }
-
-    private func userSignature(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        result(Castle.userSignature())
     }
 
     private func userAgent(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
