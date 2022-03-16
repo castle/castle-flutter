@@ -1,4 +1,25 @@
 # Changelog
+## 2.0.0 (2022-03-16)
+- Updated Castle Android SDK to 3.0.0
+- Updated Castle iOS SDK to 3.0.1
+
+- Add support for enhanced user activity monitoring.
+	- Introduced custom() method
+	- Introduced custom() method
+	- Introduced screen() method
+	- Introduced userJwt() method
+- Remove deprecated methods.
+	- Removed identify()
+	- Removed userId()
+	- Removed secure()
+	- Removed secureModeEnabled()
+	- Removed userSignature()
+	- Removed track()
+	- Removed useCloudflareApp()
+	- Removed clientIdHeaderName()
+	- Removed clientId()
+	- Removed baseUrl()
+
 ## 1.1.5 (2022-03-14)
 **Fixes**
 
