@@ -4,10 +4,10 @@
 - Updated Castle iOS SDK to 3.0.1
 
 - Add support for enhanced user activity monitoring.
-	- Introduced custom() method
-	- Introduced custom() method
-	- Introduced screen() method
-	- Introduced userJwt() method
+	- Introduced custom(name) method
+	- Introduced custom(name, properties) method
+	- Introduced screen(name) method
+	- Introduced userJwt(jwt) method
 - Remove deprecated methods.
 	- Removed identify()
 	- Removed userId()
