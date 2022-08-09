@@ -1,4 +1,8 @@
 # Changelog
+## 2.0.6 (2022-08-09)
+- Updated Castle Android SDK to 3.0.5
+- Updated Castle iOS SDK to 3.0.7
+
 ## 2.0.5 (2022-06-30)
 - Updated Castle Android SDK to 3.0.4
 - Updated Castle iOS SDK to 3.0.6
