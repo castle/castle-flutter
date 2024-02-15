@@ -202,6 +202,10 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
     }
   }
 
+  private fun advertisingIdentifier(call: MethodCall, result: Result) {
+    result.success(true)
+  }
+
   override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
     channel.setMethodCallHandler(null)
   }
