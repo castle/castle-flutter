@@ -65,6 +65,9 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
         call.method.equals("queueSize") -> {
           this.queueSize(call, result)
         }
+        call.method.equals("advertisingIdentifier") -> {
+            this.advertisingIdentifier(call, result)
+        }
         else -> {
           result.notImplemented()
         }
