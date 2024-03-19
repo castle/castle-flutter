@@ -4,6 +4,8 @@ import Castle
 import Castle.CastleConfiguration
 
 public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
+    var idfa: String? = nil
+    
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "castle", binaryMessenger: registrar.messenger())
         let instance = SwiftCastleFlutterPlugin()
@@ -34,6 +36,8 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
             userAgent(call, result: result)
         case "queueSize":
             queueSize(call, result: result)
+        case "advertisingIdentifier":
+            setAdvertisingIdentifier(call, result: result)
         default:
             result(FlutterMethodNotImplemented)
         }
@@ -42,6 +46,9 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
     private func configure(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         if let args = call.arguments as? Dictionary<String, Any> {
             let configuration = CastleConfiguration(publishableKey: (args["publishableKey"] as? String)!)
+            configuration.adSupportBlock = { () -> String in
+                return self.idfa ?? ""
+            }
 
             if let debugLoggingEnabled = args["debugLoggingEnabled"] as? Bool {
                 configuration.isDebugLoggingEnabled = debugLoggingEnabled
@@ -135,5 +142,15 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
 
     private func queueSize(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         result(Castle.queueSize())
+    }
+    
+    private func setAdvertisingIdentifier(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+        if let args = call.arguments as? Dictionary<String, Any> {
+            self.idfa = ((args["identifier"] as? String)!)
+            
+            result(true)
+        } else {
+            result(FlutterError.init(code: "bad args", message: nil, details: nil))
+        }
     }
 }

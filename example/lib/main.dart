@@ -36,6 +36,8 @@ class _MyAppState extends State<MyApp> {
         flushLimit: 20,
         baseURLAllowList: ["http://google.com"],
       );
+      // Set mock IDFA
+      await Castle.advertisingIdentifier("00000000-0000-0000-0000-000000000001");
       token = await Castle.createRequestToken;
       queueSize = await Castle.queueSize;
       userAgent = await Castle.userAgent;

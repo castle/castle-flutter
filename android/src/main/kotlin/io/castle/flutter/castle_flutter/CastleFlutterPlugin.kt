@@ -65,6 +65,9 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
         call.method.equals("queueSize") -> {
           this.queueSize(call, result)
         }
+        call.method.equals("advertisingIdentifier") -> {
+            this.advertisingIdentifier(call, result)
+        }
         else -> {
           result.notImplemented()
         }
@@ -200,6 +203,10 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
     } catch (e: Exception) {
       result.error("CastleException", e.localizedMessage, null)
     }
+  }
+
+  private fun advertisingIdentifier(call: MethodCall, result: Result) {
+    result.success(true)
   }
 
   override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {

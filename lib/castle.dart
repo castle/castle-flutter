@@ -51,6 +51,12 @@ class Castle {
     await _channel.invokeMethod('reset');
   }
 
+  static Future<void> advertisingIdentifier(String identifier) async {
+    await _channel.invokeMethod('advertisingIdentifier', <String, dynamic>{
+      'identifier': identifier,
+    });
+  }
+
   static Future<String?> get createRequestToken async {
     final String? token = await _channel.invokeMethod('createRequestToken');
     return token;
