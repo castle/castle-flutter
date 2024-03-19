@@ -1,4 +1,8 @@
 # Changelog
+## 2.0.9 (2024-03-19)
+- Updated Castle iOS SDK to 3.0.9
+- Added support for providing IDFA (iOS only)
+
 ## 2.0.8 (2022-10-06)
 - Updated Castle Android SDK to 3.0.7
 
