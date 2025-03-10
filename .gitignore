@@ -1,6 +1,13 @@
 # Miscellaneous
 .DS_Store
 
+# Android Studio generated files and folders
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+output.json
+
 # IntelliJ related
 *.iml
 *.ipr
