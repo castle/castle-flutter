@@ -1,5 +1,5 @@
 group 'io.castle.flutter.castle_flutter'
-version '2.0.11'
+version '2.0.12'
 
 buildscript {
     ext.kotlin_version = '2.0.20'

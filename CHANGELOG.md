@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.12 (2025-03-10)
+- Updated Castle Android SDK to 3.0.9
+- [#41](https://github.com/castle/castle-flutter/pull/41) Use Java 17
+
 ## 2.0.11 (2024-09-17)
 - Updated Castle iOS SDK to 3.0.13
 
