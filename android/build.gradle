@@ -1,8 +1,8 @@
 group 'io.castle.flutter.castle_flutter'
-version '1.0-SNAPSHOT'
+version '2.0.11'
 
 buildscript {
-    ext.kotlin_version = '1.9.0'
+    ext.kotlin_version = '2.0.20'
     repositories {
         google()
         jcenter()
@@ -37,6 +37,21 @@ android {
     }
     lintOptions {
         disable 'InvalidPackage'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17 // Set Java 17
+        targetCompatibility JavaVersion.VERSION_17 // Set Java 17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17" // Ensure Kotlin compiles with Java 17
+    }
+
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(17)) // Enforce Java 17 toolchain
+        }
     }
 }
 
