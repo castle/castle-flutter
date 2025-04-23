@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.14 (2025-04-23)
+- [#46](https://github.com/castle/castle-flutter/pull/46) Add configuration for lifecycle events
+- Updated Castle iOS SDK to 3.0.13
+- Updated Castle Android SDK to 3.0.10
+
 ## 2.0.13 (2025-04-04)
 - Downgraded Gradle to 7.4.2, as 8+ is not compatible with the current version of the Android SDK.
 
