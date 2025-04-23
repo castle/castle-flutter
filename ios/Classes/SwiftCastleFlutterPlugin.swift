@@ -54,6 +54,10 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
                 configuration.isDebugLoggingEnabled = debugLoggingEnabled
             }
 
+            if let lifeCycleEventsEnabled = args["lifeCycleEventsEnabled"] as? Bool {
+                configuration.isApplicationLifecycleTrackingEnabled = lifeCycleEventsEnabled
+            }
+
             if let flushLimit = args["flushLimit"] as? UInt {
                 configuration.flushLimit = flushLimit
             }

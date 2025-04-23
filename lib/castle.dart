@@ -7,13 +7,14 @@ class Castle {
   static const MethodChannel _channel =
       const MethodChannel('castle');
 
-  static Future<void> configure({required publishableKey, debugLoggingEnabled, maxQueueLimit, flushLimit, useCloudflareApp, baseURLAllowList}) async {
+  static Future<void> configure({required publishableKey, debugLoggingEnabled, maxQueueLimit, flushLimit, baseURLAllowList, lifeCycleEventsEnabled}) async {
     await _channel.invokeMethod('configure', <String, dynamic>{
       'publishableKey': publishableKey,
       'debugLoggingEnabled': debugLoggingEnabled,
       'maxQueueLimit': maxQueueLimit,
       'flushLimit': flushLimit,
       'baseURLAllowList': baseURLAllowList,
+      'lifeCycleEventsEnabled': lifeCycleEventsEnabled,
     });
   }
 
