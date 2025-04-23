@@ -84,6 +84,9 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
           call.argument<Boolean>("debugLoggingEnabled")?.let {
               builder.debugLoggingEnabled(it)
           }
+          call.argument<Boolean>("lifeCycleEventsEnabled")?.let {
+              builder.applicationLifecycleTrackingEnabled(it)
+          }
           call.argument<Int>("maxQueueLimit")?.let {
               builder.maxQueueLimit(it)
           }
