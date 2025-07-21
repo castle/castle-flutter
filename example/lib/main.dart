@@ -69,51 +69,53 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Castle TestApp'),
         ),
-        body: Container(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text(
-                _token
-              ),
-              Text(
-                _queueSize.toString()
-              ),
-              Text(
-                _userAgent
-              ),
-              Text(
-                  _requestTokenHeaderName
-              ),
-              new ElevatedButton(
-                  onPressed: _userJwt,
-                  child: new Text("Set user jwt")
-              ),
-              new ElevatedButton(
-                  onPressed: _trackScreen,
-                  child: new Text("Track Screen")
-              ),
-              new ElevatedButton(
-                  onPressed: _trackCustom,
-                  child: new Text("Track custom")
-              ),
-              new ElevatedButton(
-                  onPressed: _trackCustomProperties,
-                  child: new Text("Track custom with properties")
-              ),
-              new ElevatedButton(
-                  onPressed: _reset,
-                  child: new Text("Reset")
-              ),
-              new ElevatedButton(
-                  onPressed: _flush,
-                  child: new Text("Flush Events")
-              ),
-            ],
-          ),
-        )
+        body: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text(
+                  _token
+                ),
+                Text(
+                  _queueSize.toString()
+                ),
+                Text(
+                  _userAgent
+                ),
+                Text(
+                    _requestTokenHeaderName
+                ),
+                new ElevatedButton(
+                    onPressed: _userJwt,
+                    child: new Text("Set user jwt")
+                ),
+                new ElevatedButton(
+                    onPressed: _trackScreen,
+                    child: new Text("Track Screen")
+                ),
+                new ElevatedButton(
+                    onPressed: _trackCustom,
+                    child: new Text("Track custom")
+                ),
+                new ElevatedButton(
+                    onPressed: _trackCustomProperties,
+                    child: new Text("Track custom with properties")
+                ),
+                new ElevatedButton(
+                    onPressed: _reset,
+                    child: new Text("Reset")
+                ),
+                new ElevatedButton(
+                    onPressed: _flush,
+                    child: new Text("Flush Events")
+                ),
+              ],
+            ),
+          )
+        ),
       ),
     );
   }
