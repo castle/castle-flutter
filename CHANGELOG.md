@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0 (2025-07-21)
+- Updated Castle iOS SDK to 3.1.0
+- Updated Castle Android SDK to 3.1.0
+
 ## 2.0.14 (2025-04-23)
 - [#46](https://github.com/castle/castle-flutter/pull/46) Add configuration for lifecycle events
 - Updated Castle iOS SDK to 3.0.13

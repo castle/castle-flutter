@@ -15,8 +15,8 @@ To use this plugin, add `castle_flutter` as a [dependency in your pubspec.yaml f
  - Flutter 1.20.0+
 
 ### iOS
- - iOS 9.0+
- - Xcode 9.0+
+ - iOS 12.0+
+ - Xcode 10.0+
 
 ### Android
  - Android 5.0
