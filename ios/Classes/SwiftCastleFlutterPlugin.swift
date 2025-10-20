@@ -1,7 +1,6 @@
 import Flutter
 import UIKit
 import Castle
-import Castle.CastleConfiguration
 
 public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
     var idfa: String? = nil
