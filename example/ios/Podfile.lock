@@ -1,7 +1,7 @@
 PODS:
-  - Castle (3.1.2)
-  - castle_flutter (2.1.1):
-    - Castle (= 3.1.2)
+  - Castle (3.1.3)
+  - castle_flutter (2.1.3):
+    - Castle (= 3.1.3)
     - Flutter
   - Flutter (1.0.0)
 
@@ -20,8 +20,8 @@ EXTERNAL SOURCES:
     :path: Flutter
 
 SPEC CHECKSUMS:
-  Castle: d8faeee423c4863d609b463bf343b30be4db1001
-  castle_flutter: 47d8ae4fc855b8ccbcbde35a814958b687c905a6
+  Castle: d8a2359213dda7ca45f9e1a3ad72c008a6828c9b
+  castle_flutter: db5ffe9ac74e47bb91589459d50f8b372fb5a73d
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
 
 PODFILE CHECKSUM: c4c93c5f6502fe2754f48404d3594bf779584011
