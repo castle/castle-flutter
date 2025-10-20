@@ -3,6 +3,7 @@
 ## 2.1.3 (2025-10-20)
 
 - Updated Castle iOS SDK to 3.1.3
+- Fix: [#51](https://github.com/castle/castle-flutter/pull/51) Update Swift implementation configuration import
 
 ## 2.1.2 (2025-10-03)
 - Updated Castle iOS SDK to 3.1.2
