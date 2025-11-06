@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.4 (2025-11-06)
+
+- Updated Castle iOS SDK to 3.1.5
+
 ## 2.1.3 (2025-10-20)
 
 - Updated Castle iOS SDK to 3.1.3
