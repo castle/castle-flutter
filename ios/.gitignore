@@ -35,3 +35,7 @@ Icon?
 
 /Flutter/Generated.xcconfig
 /Flutter/flutter_export_environment.sh
+
+castle_flutter/.build/
+castle_flutter/.swiftpm/
+castle_flutter/Package.resolved

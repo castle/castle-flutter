@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.license          = package['license']
   s.authors          = package['author']
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
+  s.source_files = 'castle_flutter/Sources/castle_flutter/**/*.swift'
   s.dependency 'Flutter'
   s.platform = :ios, '12.0'
 
