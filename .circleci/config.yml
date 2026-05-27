@@ -12,7 +12,7 @@ jobs:
 
   ios_build:
     macos:
-      xcode: "26.0.1"
+      xcode: "26.5"
     steps:
       - checkout
 
