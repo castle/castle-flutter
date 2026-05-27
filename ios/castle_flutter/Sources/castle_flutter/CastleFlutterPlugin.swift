@@ -2,12 +2,13 @@ import Flutter
 import UIKit
 import Castle
 
-public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
+@objc(CastleFlutterPlugin)
+public class CastleFlutterPlugin: NSObject, FlutterPlugin {
     var idfa: String? = nil
-    
+
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "castle", binaryMessenger: registrar.messenger())
-        let instance = SwiftCastleFlutterPlugin()
+        let instance = CastleFlutterPlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
     }
 
@@ -146,11 +147,11 @@ public class SwiftCastleFlutterPlugin: NSObject, FlutterPlugin {
     private func queueSize(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         result(Castle.queueSize())
     }
-    
+
     private func setAdvertisingIdentifier(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         if let args = call.arguments as? Dictionary<String, Any> {
             self.idfa = ((args["identifier"] as? String)!)
-            
+
             result(true)
         } else {
             result(FlutterError.init(code: "bad args", message: nil, details: nil))
