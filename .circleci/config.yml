@@ -1,6 +1,7 @@
-version: 2
+version: 2.1
+
 jobs:
-  build:
+  test:
     docker:
       - image: cirrusci/flutter
     steps:
@@ -8,3 +9,84 @@ jobs:
       - run: flutter doctor
       - run: flutter test --coverage
       - run: bash <(curl -s https://codecov.io/bash)
+
+  ios_build:
+    macos:
+      xcode: "15.4.0"
+    resource_class: macos.m1.medium.gen1
+    steps:
+      - checkout
+
+      - restore_cache:
+          name: Restore Flutter SDK cache
+          keys:
+            - flutter-sdk-stable-v1
+      - run:
+          name: Install or update Flutter
+          command: |
+            if [ ! -d "$HOME/flutter/.git" ]; then
+              git clone https://github.com/flutter/flutter.git --depth 1 --branch stable "$HOME/flutter"
+            else
+              git -C "$HOME/flutter" pull --ff-only origin stable
+            fi
+            echo 'export PATH="$HOME/flutter/bin:$PATH"' >> "$BASH_ENV"
+      - run: flutter --version
+      - run: flutter precache --ios
+      - save_cache:
+          name: Save Flutter SDK cache
+          paths:
+            - ~/flutter
+          key: flutter-sdk-stable-v1
+
+      - restore_cache:
+          name: Restore Pub cache
+          keys:
+            - pub-cache-v1-{{ checksum "example/pubspec.lock" }}
+            - pub-cache-v1-
+      - run:
+          name: Fetch dependencies
+          working_directory: example
+          command: flutter pub get
+      - save_cache:
+          name: Save Pub cache
+          paths:
+            - ~/.pub-cache
+          key: pub-cache-v1-{{ checksum "example/pubspec.lock" }}
+
+      - run:
+          name: Build iOS with CocoaPods
+          working_directory: example
+          command: |
+            flutter config --no-enable-swift-package-manager
+            flutter build ios --no-codesign --debug
+
+      - run:
+          name: Reset example for SPM build
+          working_directory: example
+          command: |
+            flutter clean
+            rm -rf ios/Pods ios/.symlinks ios/Podfile.lock
+            flutter pub get
+
+      - restore_cache:
+          name: Restore SPM cache
+          keys:
+            - spm-v1-{{ checksum "ios/castle_flutter/Package.swift" }}
+            - spm-v1-
+      - run:
+          name: Build iOS with Swift Package Manager
+          working_directory: example
+          command: |
+            flutter config --enable-swift-package-manager
+            flutter build ios --no-codesign --debug
+      - save_cache:
+          name: Save SPM cache
+          paths:
+            - ~/Library/Caches/org.swift.swiftpm
+          key: spm-v1-{{ checksum "ios/castle_flutter/Package.swift" }}
+
+workflows:
+  build:
+    jobs:
+      - test
+      - ios_build
