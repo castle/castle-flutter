@@ -119,7 +119,11 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
       try {
           val name = call.argument<String>("name")
           val properties = call.argument<Map<String, Any>>("properties")
-          Castle.custom(name, properties)
+          if (properties == null) {
+              Castle.custom(name)
+          } else {
+              Castle.custom(name, properties)
+          }
           result.success(true)
       } catch (e: Exception) {
           result.error("CastleException", e.localizedMessage, null)
