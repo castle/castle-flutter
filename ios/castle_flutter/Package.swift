@@ -13,7 +13,7 @@ let package = Package(
   ],
   dependencies: [
     .package(name: "FlutterFramework", path: "../FlutterFramework"),
-    .package(url: "https://github.com/castle/castle-ios.git", exact: "3.1.7")
+    .package(url: "https://github.com/castle/castle-ios.git", exact: "3.2.0")
   ],
   targets: [
     .target(
