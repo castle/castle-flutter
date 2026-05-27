@@ -13,6 +13,7 @@ jobs:
   ios_build:
     macos:
       xcode: "26.5"
+    working_directory: /Users/distiller/castle_flutter
     steps:
       - checkout
 
