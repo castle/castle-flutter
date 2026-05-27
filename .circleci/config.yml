@@ -12,8 +12,7 @@ jobs:
 
   ios_build:
     macos:
-      xcode: "15.4.0"
-    resource_class: macos.m1.medium.gen1
+      xcode: "26.0.1"
     steps:
       - checkout
 
