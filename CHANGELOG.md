@@ -3,6 +3,7 @@
 ## 2.2.0 (2026-05-27)
 
 - Added Swift Package Manager support for iOS ([#57](https://github.com/castle/castle-flutter/issues/57))
+- Fix Android issues ([#60](https://github.com/castle/castle-flutter/issues/57))
 - Updated Castle iOS SDK to 3.2.0
 - Updated Castle Android SDK to 3.1.8
 
