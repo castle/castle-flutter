@@ -8,7 +8,17 @@ jobs:
       - checkout
       - run: flutter doctor
       - run: flutter test --coverage
-      - run: bash <(curl -s https://codecov.io/bash)
+      - run:
+          name: Report coverage
+          command: |
+            awk -F: '/^LF:/ {found += $2} /^LH:/ {hit += $2}
+                     END {
+                       if (found == 0) { print "No coverage data."; exit }
+                       printf "Lines covered: %d/%d (%.1f%%)\n", hit, found, 100 * hit / found
+                     }' coverage/lcov.info
+      - store_artifacts:
+          path: coverage/lcov.info
+          destination: coverage/lcov.info
 
   ios_build:
     macos:
