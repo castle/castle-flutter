@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: cirrusci/flutter
+      - image: ghcr.io/cirruslabs/flutter:stable
     steps:
       - checkout
       - run: flutter doctor
