@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: cirrusci/flutter
+      - image: ghcr.io/cirruslabs/flutter:stable
     steps:
       - checkout
       - run: flutter doctor
@@ -41,6 +41,9 @@ jobs:
             fi
             echo 'export PATH="$HOME/flutter/bin:$PATH"' >> "$BASH_ENV"
       - run: flutter --version
+      # castle_flutter is Swift Package Manager only, so SPM has to be enabled
+      # before `flutter pub get` — it fails to resolve the plugin otherwise.
+      - run: flutter config --enable-swift-package-manager
       - run: flutter precache --ios
       - save_cache:
           name: Save Flutter SDK cache
@@ -63,21 +66,6 @@ jobs:
             - ~/.pub-cache
           key: pub-cache-v1-{{ checksum "example/pubspec.lock" }}
 
-      - run:
-          name: Build iOS with CocoaPods
-          working_directory: example
-          command: |
-            flutter config --no-enable-swift-package-manager
-            flutter build ios --no-codesign --debug
-
-      - run:
-          name: Reset example for SPM build
-          working_directory: example
-          command: |
-            flutter clean
-            rm -rf ios/Pods ios/.symlinks ios/Podfile.lock
-            flutter pub get
-
       - restore_cache:
           name: Restore SPM cache
           keys:
@@ -86,9 +74,7 @@ jobs:
       - run:
           name: Build iOS with Swift Package Manager
           working_directory: example
-          command: |
-            flutter config --enable-swift-package-manager
-            flutter build ios --no-codesign --debug
+          command: flutter build ios --no-codesign --debug
       - save_cache:
           name: Save SPM cache
           paths:
