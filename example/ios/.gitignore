@@ -22,8 +22,13 @@ Flutter/app.flx
 Flutter/app.zip
 Flutter/flutter_assets/
 Flutter/flutter_export_environment.sh
+Flutter/ephemeral/
 ServiceDefinitions.json
 Runner/GeneratedPluginRegistrant.*
+
+# Swift Package Manager. The plugin pins castle-ios with `exact:`, so
+# Package.resolved carries no information that Package.swift doesn't.
+**/xcshareddata/swiftpm/
 
 # Exceptions to above rules.
 !default.mode1v3

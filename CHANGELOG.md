@@ -1,5 +1,37 @@
 # Changelog
 
+## 4.0.0 (2026-08-11)
+
+This release follows 2.2.1. There is no 3.x release — the version number was moved straight to
+4.0.0 so that it matches the major version of the native SDKs the plugin wraps.
+
+- Updated Castle iOS SDK to 4.2.0
+- Updated Castle Android SDK to 4.0.2
+
+**Breaking changes**
+
+- Minimum Android API level raised to 26 (Android 8.0), up from 21.
+- iOS integration is now **Swift Package Manager only**. The `castle_flutter.podspec` has
+  been removed. Enable SPM in your app with `flutter config --enable-swift-package-manager`
+  (on by default from Flutter 3.44).
+- Minimum iOS version is 13.0.
+- Minimum Flutter version is 3.29.0, minimum Dart SDK 3.4.0.
+- Removed methods that no longer exist in the native SDKs.
+	- Removed `flushIfNeeded(url)`
+	- Removed `userAgent`
+	- Removed `queueSize`
+
+**Fixes and enhancements**
+
+- `advertisingIdentifier(id)` is now applied on Android as well, via the new `adIdProvider`
+  configuration option. It was previously a no-op on Android.
+- Fixed `baseURLAllowList` never being applied on iOS. The values are sent from Dart as
+  strings but were cast to `URL`, so the cast always failed and the option was dropped.
+
+See the [Android](https://docs.castle.io/docs/android-sdk-migrating-from-v3-to-v4) and
+[iOS](https://docs.castle.io/docs/ios-sdk-migrating-from-v3-to-v4) native migration guides
+for details on the underlying SDK changes.
+
 ## 2.2.1 (2026-05-27)
 - Fix Android issues ([#60](https://github.com/castle/castle-flutter/issues/57))
 

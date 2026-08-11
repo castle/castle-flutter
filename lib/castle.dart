@@ -41,13 +41,6 @@ class Castle {
     await _channel.invokeMethod('flush');
   }
 
-  static Future<bool?> flushIfNeeded(String url) async {
-    final bool? flushIfNeeded = await _channel.invokeMethod('flushIfNeeded', <String, dynamic>{
-      'url': url,
-    });
-    return flushIfNeeded;
-  }
-
   static Future<void> reset() async {
     await _channel.invokeMethod('reset');
   }
@@ -66,15 +59,5 @@ class Castle {
   static Future<String?> get requestTokenHeaderName async {
     final String? requestTokenHeaderName = await _channel.invokeMethod('requestTokenHeaderName');
     return requestTokenHeaderName;
-  }
-
-  static Future<String?> get userAgent async {
-    final String? userAgent = await _channel.invokeMethod('userAgent');
-    return userAgent;
-  }
-
-  static Future<int?> get queueSize async {
-    final int? queueSize = await _channel.invokeMethod('queueSize');
-    return queueSize;
   }
 }
