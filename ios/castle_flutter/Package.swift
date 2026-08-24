@@ -12,7 +12,7 @@ let package = Package(
     .library(name: "castle-flutter", targets: ["castle_flutter"])
   ],
   dependencies: [
-    .package(url: "https://github.com/castle/castle-ios.git", exact: "4.2.0")
+    .package(url: "https://github.com/castle/castle-ios.git", exact: "4.3.0")
   ],
   targets: [
     .target(
