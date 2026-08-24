@@ -7,7 +7,8 @@ class Castle {
   static const MethodChannel _channel =
       const MethodChannel('castle');
 
-  static Future<void> configure({required publishableKey, debugLoggingEnabled, maxQueueLimit, flushLimit, baseURLAllowList, lifeCycleEventsEnabled}) async {
+  /// [touchCollectionEnabled] is iOS only and has no effect on Android.
+  static Future<void> configure({required publishableKey, debugLoggingEnabled, maxQueueLimit, flushLimit, baseURLAllowList, lifeCycleEventsEnabled, touchCollectionEnabled}) async {
     await _channel.invokeMethod('configure', <String, dynamic>{
       'publishableKey': publishableKey,
       'debugLoggingEnabled': debugLoggingEnabled,
@@ -15,6 +16,7 @@ class Castle {
       'flushLimit': flushLimit,
       'baseURLAllowList': baseURLAllowList,
       'lifeCycleEventsEnabled': lifeCycleEventsEnabled,
+      'touchCollectionEnabled': touchCollectionEnabled,
     });
   }
 

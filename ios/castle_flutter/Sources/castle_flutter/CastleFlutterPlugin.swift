@@ -60,6 +60,10 @@ public class CastleFlutterPlugin: NSObject, FlutterPlugin {
             configuration.isApplicationLifecycleTrackingEnabled = lifeCycleEventsEnabled
         }
 
+        if let touchCollectionEnabled = args["touchCollectionEnabled"] as? Bool {
+            configuration.isTouchCollectionEnabled = touchCollectionEnabled
+        }
+
         if let flushLimit = args["flushLimit"] as? Int {
             configuration.flushLimit = flushLimit
         }

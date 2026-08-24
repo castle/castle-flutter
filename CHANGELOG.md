@@ -23,6 +23,9 @@ This release follows 2.2.1. There is no 3.x release — the version number was m
 
 **Fixes and enhancements**
 
+- Added the `touchCollectionEnabled` configuration option, which enables or disables touch
+  signal collection introduced in Castle iOS SDK 4.3.0. iOS only.
+
 - `advertisingIdentifier(id)` is now applied on Android as well, via the new `adIdProvider`
   configuration option. It was previously a no-op on Android.
 - Fixed `baseURLAllowList` never being applied on iOS. The values are sent from Dart as

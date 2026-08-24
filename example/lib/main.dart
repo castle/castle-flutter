@@ -33,6 +33,7 @@ class _MyAppState extends State<MyApp> {
         maxQueueLimit: 100,
         flushLimit: 20,
         baseURLAllowList: ["http://google.com"],
+        touchCollectionEnabled: true,
       );
       // Set mock advertising identifier
       await Castle.advertisingIdentifier("00000000-0000-0000-0000-000000000001");
