@@ -12,15 +12,13 @@ let package = Package(
     .library(name: "castle-flutter", targets: ["castle_flutter"])
   ],
   dependencies: [
-    .package(name: "FlutterFramework", path: "../FlutterFramework"),
-    .package(url: "https://github.com/castle/castle-ios.git", exact: "3.2.0")
+    .package(url: "https://github.com/castle/castle-ios.git", exact: "4.3.0")
   ],
   targets: [
     .target(
       name: "castle_flutter",
       dependencies: [
-        .product(name: "FlutterFramework", package: "FlutterFramework"),
-        .product(name: "Castle", package: "castle-ios")
+        .product(name: "CastleSDK", package: "castle-ios")
       ]
     )
   ]

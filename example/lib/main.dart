@@ -15,8 +15,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _token = '';
-  int _queueSize = 0;
-  String _userAgent = '';
   String _requestTokenHeaderName = '';
 
   @override
@@ -27,7 +25,7 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initCastle() async {
-    var token, userId, baseUrl, queueSize, userAgent, clientIdHeaderName, requestTokenHeaderName;
+    var token, requestTokenHeaderName;
     try {
       await Castle.configure(
         publishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA",
@@ -35,12 +33,11 @@ class _MyAppState extends State<MyApp> {
         maxQueueLimit: 100,
         flushLimit: 20,
         baseURLAllowList: ["http://google.com"],
+        touchCollectionEnabled: true,
       );
-      // Set mock IDFA
+      // Set mock advertising identifier
       await Castle.advertisingIdentifier("00000000-0000-0000-0000-000000000001");
       token = await Castle.createRequestToken;
-      queueSize = await Castle.queueSize;
-      userAgent = await Castle.userAgent;
       requestTokenHeaderName = await Castle.requestTokenHeaderName;
       await Castle.userJwt(
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"
@@ -56,8 +53,6 @@ class _MyAppState extends State<MyApp> {
 
     setState(() {
       _token = token.toString();
-      _queueSize = queueSize;
-      _userAgent = userAgent.toString();
       _requestTokenHeaderName = requestTokenHeaderName.toString();
     });
   }
@@ -78,12 +73,6 @@ class _MyAppState extends State<MyApp> {
               children: <Widget>[
                 Text(
                   _token
-                ),
-                Text(
-                  _queueSize.toString()
-                ),
-                Text(
-                  _userAgent
                 ),
                 Text(
                     _requestTokenHeaderName

@@ -1,11 +1,10 @@
 group 'io.castle.flutter.castle_flutter'
-version '2.0.14'
+version '4.0.0'
 
 buildscript {
-    ext.kotlin_version = '2.1.20'
+    ext.kotlin_version = '2.2.20'
     repositories {
         google()
-        jcenter()
         mavenCentral()
     }
 
@@ -18,7 +17,6 @@ buildscript {
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
         mavenCentral()
     }
 }
@@ -29,13 +27,13 @@ apply plugin: 'kotlin-android'
 android {
     namespace 'io.castle.flutter.castle_flutter'
 
-    compileSdkVersion 35
+    compileSdkVersion 36
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 26
     }
     lintOptions {
         disable 'InvalidPackage'
@@ -59,5 +57,5 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api 'io.castle.android:castle:3.1.8'
+    api 'io.castle.android:castle:4.1.0'
 }

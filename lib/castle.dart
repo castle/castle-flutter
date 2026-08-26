@@ -7,7 +7,8 @@ class Castle {
   static const MethodChannel _channel =
       const MethodChannel('castle');
 
-  static Future<void> configure({required publishableKey, debugLoggingEnabled, maxQueueLimit, flushLimit, baseURLAllowList, lifeCycleEventsEnabled}) async {
+  /// [touchCollectionEnabled] is iOS only and has no effect on Android.
+  static Future<void> configure({required publishableKey, debugLoggingEnabled, maxQueueLimit, flushLimit, baseURLAllowList, lifeCycleEventsEnabled, touchCollectionEnabled}) async {
     await _channel.invokeMethod('configure', <String, dynamic>{
       'publishableKey': publishableKey,
       'debugLoggingEnabled': debugLoggingEnabled,
@@ -15,6 +16,7 @@ class Castle {
       'flushLimit': flushLimit,
       'baseURLAllowList': baseURLAllowList,
       'lifeCycleEventsEnabled': lifeCycleEventsEnabled,
+      'touchCollectionEnabled': touchCollectionEnabled,
     });
   }
 
@@ -41,13 +43,6 @@ class Castle {
     await _channel.invokeMethod('flush');
   }
 
-  static Future<bool?> flushIfNeeded(String url) async {
-    final bool? flushIfNeeded = await _channel.invokeMethod('flushIfNeeded', <String, dynamic>{
-      'url': url,
-    });
-    return flushIfNeeded;
-  }
-
   static Future<void> reset() async {
     await _channel.invokeMethod('reset');
   }
@@ -66,15 +61,5 @@ class Castle {
   static Future<String?> get requestTokenHeaderName async {
     final String? requestTokenHeaderName = await _channel.invokeMethod('requestTokenHeaderName');
     return requestTokenHeaderName;
-  }
-
-  static Future<String?> get userAgent async {
-    final String? userAgent = await _channel.invokeMethod('userAgent');
-    return userAgent;
-  }
-
-  static Future<int?> get queueSize async {
-    final int? queueSize = await _channel.invokeMethod('queueSize');
-    return queueSize;
   }
 }

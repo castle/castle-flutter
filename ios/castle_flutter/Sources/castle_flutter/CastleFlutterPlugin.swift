@@ -1,6 +1,6 @@
 import Flutter
 import UIKit
-import Castle
+import CastleSDK
 
 @objc(CastleFlutterPlugin)
 public class CastleFlutterPlugin: NSObject, FlutterPlugin {
@@ -22,8 +22,6 @@ public class CastleFlutterPlugin: NSObject, FlutterPlugin {
             custom(call, result: result)
         case "flush":
             flush(call, result: result)
-        case "flushIfNeeded":
-            flushIfNeeded(call, result: result)
         case "reset":
             reset(call, result: result)
         case "createRequestToken":
@@ -32,10 +30,6 @@ public class CastleFlutterPlugin: NSObject, FlutterPlugin {
             requestTokenHeaderName(call, result: result)
         case "userJwt":
             userJwt(call, result: result)
-        case "userAgent":
-            userAgent(call, result: result)
-        case "queueSize":
-            queueSize(call, result: result)
         case "advertisingIdentifier":
             setAdvertisingIdentifier(call, result: result)
         default:
@@ -43,38 +37,50 @@ public class CastleFlutterPlugin: NSObject, FlutterPlugin {
         }
     }
 
+    // Castle.configure(_:) must be called on the main thread, otherwise it throws
+    // CastleConfigurationError.mustConfigureOnMainThread. Method channel handlers
+    // are already invoked on the platform (main) thread, so no dispatch is needed.
     private func configure(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        if let args = call.arguments as? Dictionary<String, Any> {
-            let configuration = CastleConfiguration(publishableKey: (args["publishableKey"] as? String)!)
-            configuration.adSupportBlock = { () -> String in
-                return self.idfa ?? ""
-            }
-
-            if let debugLoggingEnabled = args["debugLoggingEnabled"] as? Bool {
-                configuration.isDebugLoggingEnabled = debugLoggingEnabled
-            }
-
-            if let lifeCycleEventsEnabled = args["lifeCycleEventsEnabled"] as? Bool {
-                configuration.isApplicationLifecycleTrackingEnabled = lifeCycleEventsEnabled
-            }
-
-            if let flushLimit = args["flushLimit"] as? UInt {
-                configuration.flushLimit = flushLimit
-            }
-
-            if let maxQueueLimit = args["maxQueueLimit"] as? UInt {
-                configuration.maxQueueLimit = maxQueueLimit
-            }
-
-            if let baseURLAllowList = args["baseURLAllowList"] as? Array<URL> {
-                configuration.baseURLAllowList = baseURLAllowList
-            }
-
-            Castle.configure(configuration)
-
-            result(true)
-        } else {
+        guard let args = call.arguments as? Dictionary<String, Any>,
+              let publishableKey = args["publishableKey"] as? String else {
             result(FlutterError.init(code: "bad args", message: nil, details: nil))
+            return
+        }
+
+        let configuration = CastleConfiguration(publishableKey: publishableKey)
+        configuration.adSupportBlock = { () -> String in
+            return self.idfa ?? ""
+        }
+
+        if let debugLoggingEnabled = args["debugLoggingEnabled"] as? Bool {
+            configuration.isDebugLoggingEnabled = debugLoggingEnabled
+        }
+
+        if let lifeCycleEventsEnabled = args["lifeCycleEventsEnabled"] as? Bool {
+            configuration.isApplicationLifecycleTrackingEnabled = lifeCycleEventsEnabled
+        }
+
+        if let touchCollectionEnabled = args["touchCollectionEnabled"] as? Bool {
+            configuration.isTouchCollectionEnabled = touchCollectionEnabled
+        }
+
+        if let flushLimit = args["flushLimit"] as? Int {
+            configuration.flushLimit = flushLimit
+        }
+
+        if let maxQueueLimit = args["maxQueueLimit"] as? Int {
+            configuration.maxQueueLimit = maxQueueLimit
+        }
+
+        if let baseURLAllowList = args["baseURLAllowList"] as? Array<String> {
+            configuration.baseURLAllowList = baseURLAllowList.compactMap { URL(string: $0) }
+        }
+
+        do {
+            try Castle.configure(configuration)
+            result(true)
+        } catch {
+            result(FlutterError.init(code: "CastleException", message: error.localizedDescription, details: nil))
         }
     }
 
@@ -116,16 +122,6 @@ public class CastleFlutterPlugin: NSObject, FlutterPlugin {
         result(true)
     }
 
-    private func flushIfNeeded(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        if let args = call.arguments as? Dictionary<String, Any> {
-            Castle.flushIfNeeded(URL(string: (args["url"] as? String)!)!)
-
-            result(true)
-        } else {
-            result(FlutterError.init(code: "bad args", message: nil, details: nil))
-        }
-    }
-
     private func reset(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         Castle.reset()
 
@@ -137,15 +133,7 @@ public class CastleFlutterPlugin: NSObject, FlutterPlugin {
     }
 
     private func requestTokenHeaderName(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        result(CastleRequestTokenHeaderName)
-    }
-
-    private func userAgent(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        result(Castle.userAgent())
-    }
-
-    private func queueSize(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        result(Castle.queueSize())
+        result(Castle.requestTokenHeaderName)
     }
 
     private func setAdvertisingIdentifier(_ call: FlutterMethodCall, result: @escaping FlutterResult) {

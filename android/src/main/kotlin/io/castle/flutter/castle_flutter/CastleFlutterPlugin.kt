@@ -1,10 +1,9 @@
 package io.castle.flutter.castle_flutter
 
 import android.app.Application
-import android.content.Context
 import androidx.annotation.NonNull
-import io.castle.android.Castle
-import io.castle.android.CastleConfiguration
+import io.castle.Castle
+import io.castle.Configuration
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -20,6 +19,11 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
   private lateinit var channel : MethodChannel
 
   private lateinit var application: Application
+
+  /// Advertising identifier supplied from Dart. Read lazily by the adIdProvider
+  /// installed at configure time, so it can be set before or after configure.
+  @Volatile
+  private var advertisingIdentifier: String? = null
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     channel = MethodChannel(flutterPluginBinding.binaryMessenger, "castle")
@@ -41,14 +45,8 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
         call.method.equals("flush") -> {
           this.flush(call, result)
         }
-        call.method.equals("flushIfNeeded") -> {
-          this.flushIfNeeded(call, result)
-        }
         call.method.equals("reset") -> {
           this.reset(result)
-        }
-        call.method.equals("baseUrl") -> {
-          this.baseUrl(call, result)
         }
         call.method.equals("createRequestToken") -> {
             this.createRequestToken(call, result)
@@ -58,12 +56,6 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
         }
         call.method.equals("userJwt") -> {
           this.userJwt(call, result)
-        }
-        call.method.equals("userAgent") -> {
-          this.userAgent(call, result)
-        }
-        call.method.equals("queueSize") -> {
-          this.queueSize(call, result)
         }
         call.method.equals("advertisingIdentifier") -> {
             this.advertisingIdentifier(call, result)
@@ -76,7 +68,7 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
 
   private fun configure(call: MethodCall, result: Result) {
       try {
-          val builder = CastleConfiguration.Builder()
+          val builder = Configuration.Builder()
 
           call.argument<String>("publishableKey")?.let {
               builder.publishableKey(it)
@@ -96,6 +88,8 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
           call.argument<List<String>>("baseURLAllowList")?.let {
               builder.baseURLAllowList(it)
           }
+          builder.adIdProvider { advertisingIdentifier ?: "" }
+
           val configuration = builder.build()
           Castle.configure(application, configuration)
 
@@ -107,7 +101,7 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
 
   private fun screen(call: MethodCall, result: Result) {
       try {
-          val name = call.argument<String>("name")
+          val name = call.argument<String>("name") ?: ""
           Castle.screen(name)
           result.success(true)
       } catch (e: Exception) {
@@ -117,7 +111,7 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
 
   private fun custom(call: MethodCall, result: Result) {
       try {
-          val name = call.argument<String>("name")
+          val name = call.argument<String>("name") ?: ""
           val properties = call.argument<Map<String, Any>>("properties")
           if (properties == null) {
               Castle.custom(name)
@@ -139,16 +133,6 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
     }
   }
 
-  private fun flushIfNeeded(call: MethodCall, result: Result) {
-      try {
-          val url = call.argument<String>("url")
-          Castle.flushIfNeeded(url)
-          result.success(true)
-      } catch (e: Exception) {
-          result.error("CastleException", e.localizedMessage, null)
-      }
-  }
-
   private fun reset(result: Result) {
     try {
       Castle.reset()
@@ -158,18 +142,9 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
     }
   }
 
-  private fun baseUrl(call: MethodCall, result: Result) {
-    try {
-      val baseUrl: String = Castle.baseUrl()
-      result.success(baseUrl)
-    } catch (e: Exception) {
-      result.error("CastleException", e.localizedMessage, null)
-    }
-  }
-
   private fun createRequestToken(call: MethodCall, result: Result) {
       try {
-          val token: String = Castle.createRequestToken()
+          val token: String? = Castle.createRequestToken()
           result.success(token)
       } catch (e: Exception) {
           result.error("CastleException", e.localizedMessage, null)
@@ -187,32 +162,16 @@ class CastleFlutterPlugin: FlutterPlugin, MethodCallHandler {
 
   private fun userJwt(call: MethodCall, result: Result) {
     try {
-        val userJwt = call.argument<String>("userJwt")
-        Castle.userJwt(userJwt)
+        val userJwt = call.argument<String>("userJwt") ?: ""
+        Castle.setUserJwt(userJwt)
       result.success(true)
-    } catch (e: Exception) {
-      result.error("CastleException", e.localizedMessage, null)
-    }
-  }
-  private fun userAgent(call: MethodCall, result: Result) {
-    try {
-      val userAgent: String = Castle.userAgent()
-      result.success(userAgent)
-    } catch (e: Exception) {
-      result.error("CastleException", e.localizedMessage, null)
-    }
-  }
-
-  private fun queueSize(call: MethodCall, result: Result) {
-    try {
-      val queueSize: Int = Castle.queueSize()
-      result.success(queueSize)
     } catch (e: Exception) {
       result.error("CastleException", e.localizedMessage, null)
     }
   }
 
   private fun advertisingIdentifier(call: MethodCall, result: Result) {
+    advertisingIdentifier = call.argument<String>("identifier")
     result.success(true)
   }
 
