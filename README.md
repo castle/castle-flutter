@@ -5,6 +5,8 @@
 [![Pub Version](https://img.shields.io/pub/v/castle_flutter)](https://pub.dev/packages/castle_flutter)
 [![CircleCI](https://img.shields.io/circleci/build/github/castle/castle-flutter/master?token=1ac87baf6b68cf1b425e8156ffc0c7497432026f)](https://circleci.com/gh/castle/castle-flutter)
 
+**NOTE:** Version `4.0.0` has breaking changes compared to previous `2.x.x` versions. There is no `3.x` release; the version was bumped to `4.0.0` to match the major version of the native SDKs. iOS integration is now Swift Package Manager only and CocoaPods is no longer supported. The minimum Android API level is 26 and the minimum iOS version is 13.0. `flushIfNeeded`, `userAgent` and `queueSize` have been removed. See [Upgrading from 2.x to 4.0.0](#upgrading-from-2x-to-400).
+
 ## Installation
 To use this plugin, add `castle_flutter` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
 
