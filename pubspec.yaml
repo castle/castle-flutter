@@ -1,6 +1,6 @@
 description: Castle Flutter plugin.
 name: castle_flutter
-version: 4.0.0
+version: 4.0.1
 homepage: https://github.com/castle/castle-flutter
 
 environment:
